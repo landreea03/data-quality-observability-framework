@@ -115,9 +115,14 @@ class DataQualityEngine:
                 column_name=r.column_name,
                 passed=r.passed,
                 severity=r.severity,
-                metric_value=r.metric_value,
-                baseline_mean=r.baseline_mean,
-                baseline_std=r.baseline_std,
+                # Defensively cast to native Python float: numpy.float64 values
+                # (which pandas/numpy operations can silently produce) break
+                # psycopg2's SQL parameter binding, even though sqlite accepts
+                # them fine -- this guards against that regardless of which
+                # check produced the number.
+                metric_value=float(r.metric_value) if r.metric_value is not None else None,
+                baseline_mean=float(r.baseline_mean) if r.baseline_mean is not None else None,
+                baseline_std=float(r.baseline_std) if r.baseline_std is not None else None,
                 message=r.message,
             ))
 

@@ -36,7 +36,7 @@ def compute_psi(today_props: dict, baseline_props: dict) -> float:
         a = max(today_props.get(c, 0.0), EPSILON)
         b = max(baseline_props.get(c, 0.0), EPSILON)
         psi += (a - b) * math.log(a / b)
-    return psi
+    return float(psi)  # guard against numpy.float64 leaking out (breaks psycopg2 inserts)
 
 
 def check_categorical_drift(today_df, column: str, historical_df) -> CheckResult:
