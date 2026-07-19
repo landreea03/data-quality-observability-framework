@@ -1,10 +1,17 @@
 # Data Quality Observability Framework
 
+[![tests](https://github.com/landreea03/data-quality-observability-framework/actions/workflows/tests.yml/badge.svg)](https://github.com/landreea03/data-quality-observability-framework/actions/workflows/tests.yml)
+
+**Live demo:** https://data-quality-observability-framework-png9f54d5pele4hmuxdr4w.streamlit.app/
+**Product spec:** [docs/PRODUCT_SPEC.md](docs/PRODUCT_SPEC.md) — problem statement, success metrics, risks, and a phased rollout plan, written as if this were a real internal tool pitch.
+
 A mini Monte Carlo / Great Expectations: a statistical observability layer
 that sits on top of a daily data pipeline and catches schema drift, null
 spikes, volume anomalies, and distribution shifts automatically — without
 hand-tuned thresholds — then alerts Slack and shows a health-score trend
 on a dashboard.
+
+![Health score dashboard showing a drop from 100 to 61.5 on the day corrupted data landed](docs/dashboard-screenshot.png)
 
 Simulated dataset: a daily `orders` batch (`order_id`, `customer_id`,
 `product_id`, `price`, `quantity`, `order_date`, `status`), standing in
